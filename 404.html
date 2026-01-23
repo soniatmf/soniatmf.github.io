@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <title>Redirecting…</title>
   <script>
-window.location.replace("/file.pdf?v=2026-01-23");
+  const timestamp = Math.floor(Date.now() / 1000);
+  window.location.replace(`/file.pdf?v=${timestamp}`);
   </script>
 </head>
 <body>
