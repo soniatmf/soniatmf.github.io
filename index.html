@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancioneros Misa</title>
+    <style>
+        /* Estilos CSS */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d4af37; /* Dorado */
+            --bg-color: #f4f7f6;
+            --white: #ffffff;
+            --separator-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .container {
+            text-align: center;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        /* The New Separator Style */
+        .separator {
+            height: 2px;
+            width: 60px;
+            background-color: var(--accent-color);
+            margin: 1.5rem auto 2.5rem;
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .btn-misa {
+            background-color: var(--white);
+            border: 2px solid var(--accent-color);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-misa:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .icon {
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="icon">⛪</div>
+        <h1 id="titulo">Cancionero</h1>
+        
+        <div class="separator"></div>
+
+        <div class="button-group">
+            <a href="files/file1.pdf" class="btn-misa" target="_blank">
+               Domingo 1 de Marzo 11:00 y 12:30
+            </a>
+            </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.btn-misa');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Prevent immediate navigation
+                    e.preventDefault();
+
+                    const originalUrl = this.getAttribute('href');
+                    
+                    // Generate Unix Timestamp (seconds)
+                    const unixTime = Math.floor(Date.now() / 1000);
+
+                    // Append timestamp as a query parameter (the "slug")
+                    const newUrl = `${originalUrl}?t=${unixTime}`;
+
+                    // Open the file with the unique timestamp
+                    window.open(newUrl, '_blank');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
